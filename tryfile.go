@@ -10,12 +10,9 @@ import (
 	log "github.com/go-eden/slf4go"
 )
 
-/* dist =>
-   //go:embed dist
-   var dist embed.FS
-
-   http.FileSystem => http.FS(dist)
-*/
+// dist => //go:embed dist
+// http.FileSystem => http.FS(dist)
+// staticFileDir => Gin Router And Static Directory
 func RegisterTryFile(router *gin.Engine, hfs http.FileSystem, staticFileDir ...string) {
 	if len(staticFileDir) == 1 {
 		router.Any(fmt.Sprintf("%s/*any", staticFileDir[0]), WrapHandler(staticFileDir[0], hfs))
